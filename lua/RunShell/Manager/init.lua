@@ -32,23 +32,22 @@ local slots = {
 
 local M = {}
 function M.init()
-  vim.api.nvim_create_autocmd('WinClosed', {
-    callback = slots.on_windows
-
+  vim.api.nvim_create_autocmd({'WinClosed'}, {
+    callback = slots.on_winclose
   })
-  vim.api.nvim_create_autocmd('TabNewEntered', {
+  vim.api.nvim_create_autocmd({'TabNewEntered'}, {
     callback = slots.on_tabnew
   })
 
-  vim.api.nvim_create_autocmd('TabClosed', {
+  vim.api.nvim_create_autocmd({'TabClosed'}, {
     callback = slots.on_tabclose
   })
 
-  vim.api.nvim_create_autocmd('VimEnter', {
+  vim.api.nvim_create_autocmd({'VimEnter'}, {
     callback = slots.on_vimenter
   })
 
-  vim.api.nvim_create_autocmd('BufDelete', {
+  vim.api.nvim_create_autocmd({'BufDelete'}, {
     callback = slots.on_bufdelete
   })
   return true
