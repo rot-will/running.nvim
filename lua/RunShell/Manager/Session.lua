@@ -101,7 +101,12 @@ end
 
 ---@return table
 function Session.list_bufs()
-  return vim.tbl_keys(sessions)
+  local keys={}
+  for k,_ in pairs(sessions) do
+    table.insert(keys,k)
+  end
+  -- return vim.tbl_keys(sessions)
+  return keys
 end
 
 ---@param bufid number?
@@ -127,7 +132,7 @@ function Session.next(bufid,depth)
     bufindex = 1
   else
     bufindex = vim.fn.index(keys, bufid) + 2
-    if bufindex > #keys then
+    if bufindex > vim.tbl_count(sessions) then
       bufindex = 1
     end
   end
