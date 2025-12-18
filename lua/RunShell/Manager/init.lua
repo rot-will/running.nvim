@@ -5,9 +5,11 @@ local global = require('RunShell/global')
 local slots = {
   on_winclose = function(args)
     local tab = Tab.get_current_tab()
+    print("asdfasdf")
     if tab == nil then
       return
     end
+    print(tab.winid)
     tab:clean()
   end,
   on_tabnew = function(args)
@@ -91,6 +93,10 @@ function M.use(bufid)
   tab:use(bufid)
 end
 
+function M.hide()
+  local tab = Tab.get_current_tab()
+  tab.stop()
+end
 ---@param bufid number?
 function M.unuse(bufid)
   if bufid == nil then

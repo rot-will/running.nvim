@@ -75,10 +75,10 @@ end
 
 ---@return number?
 function Tab:get_bufid()
-  if self.winid ~= nil then
-    return self.bufid
-  end
-  return nil
+  -- if self.winid ~= nil then
+  return self.bufid
+  -- end
+  -- return nil
 end
 
 ---@param bufid number?
@@ -132,7 +132,7 @@ function Tab:use(bufid)
   if buf == nil then
     return false
   end
-  local winid = self.winid
+  local winid = self:get_winid()
   if winid == nil then
     winid = self:start()
   end

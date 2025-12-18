@@ -90,7 +90,7 @@ function RunShell.hide_session()
   if global.initialize~=true then
     return
   end
-  Manager.stop()
+  Manager.hide()
 end
 
 function RunShell.show_session()

@@ -108,7 +108,7 @@ end
 ---@param depth number?
 ---@return Session?
 function Session.next(bufid,depth)
-  if #sessions==0 then
+  if vim.tbl_count(sessions)==0 then
     return nil
   end
   if depth==nil then
@@ -118,7 +118,7 @@ function Session.next(bufid,depth)
       depth=1
     end
   end
-  if depth > #sessions then
+  if depth > vim.tbl_count(sessions) then
     return nil
   end
   local keys=Session.list_bufs()
@@ -126,9 +126,9 @@ function Session.next(bufid,depth)
   if bufid == nil then
     bufindex = 1
   else
-    bufindex = vim.index(keys, bufid) + 1
+    bufindex = vim.index(keys, bufid) + 2
     if bufindex >= #keys then
-      bufindex = #keys
+      bufindex = 1
     end
   end
 
@@ -144,7 +144,7 @@ end
 ---@param depth number?
 ---@return Session?
 function Session.prev(bufid,depth)
-  if #sessions==0 then
+  if vim.tbl_count(sessions)==0 then
     return nil
   end
   if depth==nil then
@@ -154,7 +154,7 @@ function Session.prev(bufid,depth)
       depth=1
     end
   end
-  if depth >= #sessions then
+  if depth >= vim.tbl_count(sessions) then
     return nil
   end
   local keys=Session.list_bufs()
@@ -162,9 +162,9 @@ function Session.prev(bufid,depth)
   if bufid == nil then
     bufindex = #keys
   else
-    bufindex = vim.index(keys, bufid) - 1
+    bufindex = vim.fn.index(keys, bufid)
     if bufindex < 1 then
-      bufindex = 1
+      bufindex = vim.tbl_count(sessions)
     end
   end
 
@@ -179,7 +179,7 @@ end
 ---@param bufid number?
 ---@return Session?
 function Session.get_session_by_id(bufid)
-  if #sessions==0 then
+  if vim.tbl_count(sessions)==0 then
     return nil
   end
   if bufid~=nil then
