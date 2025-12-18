@@ -24,7 +24,6 @@ function run(command)
   if command == nil then
     return
   end
-  print(123)
   Manager.run(command)
   -- command='terminal ' .. opts.args
   -- vim.cmd([[

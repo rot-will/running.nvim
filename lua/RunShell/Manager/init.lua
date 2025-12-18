@@ -5,12 +5,13 @@ local global = require('RunShell/global')
 local slots = {
   on_winclose = function(args)
     local tab = Tab.get_current_tab()
-    print("asdfasdf")
     if tab == nil then
       return
     end
-    print(tab.winid)
-    tab:clean()
+    local winid = tonumber(args.match)
+    if tab:get_winid() == winid then
+      tab:clean()
+    end
   end,
   on_tabnew = function(args)
     local tabid = tonumber(args.match)
@@ -34,22 +35,22 @@ local slots = {
 
 local M = {}
 function M.init()
-  vim.api.nvim_create_autocmd({'WinClosed'}, {
+  vim.api.nvim_create_autocmd({ 'WinClosed' }, {
     callback = slots.on_winclose
   })
-  vim.api.nvim_create_autocmd({'TabNewEntered'}, {
+  vim.api.nvim_create_autocmd({ 'TabNewEntered' }, {
     callback = slots.on_tabnew
   })
 
-  vim.api.nvim_create_autocmd({'TabClosed'}, {
+  vim.api.nvim_create_autocmd({ 'TabClosed' }, {
     callback = slots.on_tabclose
   })
 
-  vim.api.nvim_create_autocmd({'VimEnter'}, {
+  vim.api.nvim_create_autocmd({ 'VimEnter' }, {
     callback = slots.on_vimenter
   })
 
-  vim.api.nvim_create_autocmd({'BufDelete'}, {
+  vim.api.nvim_create_autocmd({ 'BufDelete' }, {
     callback = slots.on_bufdelete
   })
   return true
@@ -97,6 +98,7 @@ function M.hide()
   local tab = Tab.get_current_tab()
   tab.stop()
 end
+
 ---@param bufid number?
 function M.unuse(bufid)
   if bufid == nil then
@@ -110,7 +112,6 @@ end
 function M.is_visiable()
   local tab = Tab.get_current_tab()
   tab:is_visiable()
-
 end
 
 return M
