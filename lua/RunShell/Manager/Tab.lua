@@ -88,7 +88,7 @@ function Tab:use_next(bufid)
     bufid = self:get_bufid()
   end
 
-  local buf = Session.prev(bufid)
+  local buf = Session.next(bufid)
   if buf == nil then
     return false
   end
@@ -109,7 +109,7 @@ function Tab:use_prev(bufid)
   if bufid == nil then
     bufid = self:get_bufid()
   end
-  local buf = Session.next(bufid)
+  local buf = Session.prev(bufid)
   if buf == nil then
     return false
   end
