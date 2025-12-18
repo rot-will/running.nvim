@@ -12,16 +12,6 @@ function save_shell()
 end
 
 
-function register_shell()
-  if global.prefix_key==nil then
-    return
-  end
-  for i = 0, #global.shell - 1, 1 do
-    vim.keymap.set('n', global.prefix_key .. i, function()
-      run_shell(i + 1)
-    end, { desc = "run " .. global.shell[i + 1] })
-  end
-end
 
 function clear_keys()
   for i = 0, #global.shell - 1, 1 do
@@ -52,6 +42,18 @@ function run_shell(index)
   local command = global.shell[index]
   run(command)
 end
+
+function register_shell()
+  if global.prefix_key==nil then
+    return
+  end
+  for i = 0, #global.shell - 1, 1 do
+    vim.keymap.set('n', global.prefix_key .. i, function()
+      run_shell(i + 1)
+    end, { desc = "run " .. global.shell[i + 1] })
+  end
+end
+
 
 function initshell()
   file.ensure_path(global.shellpath)
