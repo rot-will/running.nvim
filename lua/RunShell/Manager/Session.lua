@@ -127,7 +127,7 @@ function Session.next(bufid,depth)
     bufindex = 1
   else
     bufindex = vim.fn.index(keys, bufid) + 2
-    if bufindex >= #keys then
+    if bufindex > #keys then
       bufindex = 1
     end
   end
