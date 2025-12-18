@@ -157,6 +157,9 @@ end
 ---@param tabid number?
 ---@return Tab
 function Tab.new_instance(tabid)
+  if tabid==nil then
+    tabid=vim.api.nvim_get_current_tabpage()
+  end
   local tab = Tab:new(tabid)
   tabs[tabid] = tab
   return tab
