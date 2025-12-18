@@ -108,4 +108,8 @@ function RunShell.is_visiable()
   Manager.is_visiable()
 end
 
-return RunShell
+return {
+  abc=123
+}
+
+-- return RunShell
