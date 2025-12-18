@@ -1,4 +1,5 @@
-local RunShell={}
+local RunShell = {}
+RunShell.__index = RunShell
 
 local global = require('RunShell/global')
 local Manager = require('RunShell/Manager')
@@ -42,8 +43,6 @@ function RunShell.setup(args)
   global.initialize=true
 end
 
-local RunShell = {}
-RunShell.__index = RunShell
 
 function RunShell.run_default()
   if global.initialize~=true then
@@ -108,8 +107,5 @@ function RunShell.is_visiable()
   Manager.is_visiable()
 end
 
-return {
-  abc=123
-}
 
--- return RunShell
+return RunShell
