@@ -25,12 +25,6 @@ function run(command)
     return
   end
   Manager.run(command)
-  -- command='terminal ' .. opts.args
-  -- vim.cmd([[
-  --         wincmd s
-  --         wincmd J
-  --         terminal ]] .. command)
-  -- vim.cmd('startinsert')
 end
 
 function run_shell(index)
@@ -76,6 +70,7 @@ end
 return {
   run = run,
   run_shell = run_shell,
+  clear_keys = clear_keys,
   initshell = initshell,
   save_shell = save_shell,
   register_shell=register_shell
