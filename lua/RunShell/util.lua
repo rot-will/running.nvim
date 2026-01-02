@@ -58,6 +58,8 @@ function initshell()
   global.default = tonumber(result[1])
   table.remove(result, 1)
 
+  global.shell=result
+
   if #global.shell == 0 then
     global.shell = global.default_shell
     global.default = 1
